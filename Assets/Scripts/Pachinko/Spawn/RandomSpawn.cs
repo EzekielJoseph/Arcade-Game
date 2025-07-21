@@ -7,14 +7,13 @@ public class RandomSpawn : MonoBehaviour
     public Rigidbody2D rb;
     public float maxX = 2.6f;
     public float minX = -2.6f;
+    public float xPos = 0f;
     public float yPosition = 6.3f;
+
     Vector2 spawnPosition;
+
     public bool isBallRelease = false;
 
-    public float xPos = 0f; // This variable is not used in the current code, but can be used for future modifications.
-
-
-    // Start is called before the first frame update
     void Start()
     {
         //float xPosition = Random.Range(minX, maxX);
@@ -25,7 +24,7 @@ public class RandomSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb.velocity);
+        //Debug.Log(rb.velocity);
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -49,7 +48,7 @@ public class RandomSpawn : MonoBehaviour
         {
             isBallRelease = true;
             //SceneManager.LoadScene("Pachinko Game");
-            Debug.Log("Space key pressed, loading Pachinko Game scene.");
+            //Debug.Log("Space key pressed, loading Pachinko Game scene.");
             Debug.Log("Spawned at: " + spawnPosition);
             rb.velocity = Vector2.zero;
         }
