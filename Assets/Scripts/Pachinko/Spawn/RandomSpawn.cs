@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using System.IO.Ports;
 
 public class RandomSpawn : MonoBehaviour
 {
@@ -9,16 +8,28 @@ public class RandomSpawn : MonoBehaviour
     public float minX = -2.6f;
     public float xPos = 0f;
     public float yPosition = 6.3f;
+    public bool isBallRelease = false;
 
     Vector2 spawnPosition;
 
-    public bool isBallRelease = false;
+    SerialPort controlSerial = new SerialPort("COM11", 115200); // Ganti COM5 sesuai port ESP32 kamu
 
     void Start()
     {
-        //float xPosition = Random.Range(minX, maxX);
-        //spawnPosition = new Vector2(xPosition, yPosition);
-        //transform.position = spawnPosition;
+        if(!controlSerial.IsOpen)
+        {
+            try
+            {
+                controlSerial.Open();
+                Debug.Log("Serial port opened successfully.");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Failed to open serial port: " + e.Message);
+            }
+        }
+        spawnPosition = new Vector2(xPos, yPosition);
+        transform.position = spawnPosition;
     }
 
     // Update is called once per frame
@@ -26,14 +37,36 @@ public class RandomSpawn : MonoBehaviour
     {
         //Debug.Log(rb.velocity);
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        //if (Input.GetKey(KeyCode.LeftArrow))
+        //{
+        //    xPos -= 0.05f;
+        //}
+
+        //if (Input.GetKey(KeyCode.RightArrow))
+        //{
+        //    xPos += 0.05f;
+        //}
+
+        if (controlSerial.IsOpen && controlSerial.BytesToRead > 0)
         {
-            xPos -= 0.05f;
-        }
-        
-        if(Input.GetKey(KeyCode.RightArrow))
-        {
-            xPos += 0.05f;
+            try
+            {
+                string data = controlSerial.ReadLine().Trim();
+
+                if (data == "LEFT")
+                {
+                    xPos -= 0.1f;
+                }
+                else if (data == "RIGHT") 
+                { 
+                    xPos += 0.1f; 
+                }
+
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Error reading from serial port: " + e.Message);
+            }
         }
 
         xPos = Mathf.Clamp(xPos, minX, maxX); // Ensure xPos stays within bounds
@@ -47,10 +80,17 @@ public class RandomSpawn : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             isBallRelease = true;
-            //SceneManager.LoadScene("Pachinko Game");
-            //Debug.Log("Space key pressed, loading Pachinko Game scene.");
-            Debug.Log("Spawned at: " + spawnPosition);
             rb.velocity = Vector2.zero;
+            Debug.Log("Spawned at: " + spawnPosition);
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        if (controlSerial != null && controlSerial.IsOpen)
+        {
+            controlSerial.Close();
+            Debug.Log("Serial port closed.");
         }
     }
 }

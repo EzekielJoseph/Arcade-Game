@@ -4,9 +4,6 @@ const int buttonLeft = 25;
 const int buttonRight = 33;
 const int ledPin = 2;    
 
-bool lefPressed = false;
-bool rightPressed = false;
-
 void setup() {
   Serial.begin(115200);
   pinMode(buttonLeft, INPUT_PULLUP);
@@ -21,36 +18,15 @@ void loop() {
   int buttonState2 = digitalRead(buttonRight);
 
   //Left Button
-  if (buttonState1 == LOW && !lefPressed) {
+  if (buttonState1 == LOW) {
     Serial.println("LEFT");
-    lefPressed = true;
-
-    for(int i = 0; i < 2; i++) {
-      digitalWrite(ledPin, HIGH); // Nyalakan LED
-      delay(500); // Tunggu 0.5 detik
-      digitalWrite(ledPin, LOW); // Matikan LED
-      delay(500); // Tunggu 0.5 detik
-    }
-
-  } else if (buttonState1 == HIGH && lefPressed) {
-    lefPressed = false; // Reset flag jika tombol kiri dilepas
+    delay(20);
   } 
 
   //Right Button
-  if(buttonState2 == LOW && !rightPressed) {
-    Serial.println("RIGHT");    
-    rightPressed = true; // Set flag untuk tombol kanan ditekan
-
-
-    for(int i = 0; i < 4; i++) {
-      digitalWrite(ledPin, HIGH); // Nyalakan LED
-      delay(500); // Tunggu 0.5 detik
-      digitalWrite(ledPin, LOW); // Matikan LED
-      delay(500); // Tunggu 0.5 detik
-    }
-    
-  } else if (buttonState2 == HIGH && rightPressed) {
-    rightPressed = false; // Reset flag jika tombol kanan dilepas
-  } 
+  if(buttonState2 == LOW ) {
+    Serial.println("RIGHT");
+    delay(20);
+  }
 }
 
