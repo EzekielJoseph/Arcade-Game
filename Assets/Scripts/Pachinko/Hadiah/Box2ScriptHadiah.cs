@@ -9,6 +9,11 @@ public class Box2ScriptHadiah : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             Debug.Log("Selamat Kamu Menang Lima Puluh Ribu USD!!!");
+            WinPanelManager panel = FindAnyObjectByType<WinPanelManager>();
+            if (panel != null)
+            {
+                panel.ShowWinPanel("Selamat Kamu Menang Lima Puluh Ribu USD!!!");
+            }
         }
     }
 }

@@ -9,6 +9,11 @@ public class Box3ScriptHadiah : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             Debug.Log("NT Brok, Silahkan Coba Lagi");
+            WinPanelManager panel = FindAnyObjectByType < WinPanelManager>();
+            if (panel != null)
+            {
+                panel.ShowWinPanel("NT Brok, Silahkan Coba Lagi");
+            }
         }
     }
 }

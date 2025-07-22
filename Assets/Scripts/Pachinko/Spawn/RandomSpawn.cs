@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO.Ports;
 
 public class RandomSpawn : MonoBehaviour
@@ -12,11 +12,11 @@ public class RandomSpawn : MonoBehaviour
 
     Vector2 spawnPosition;
 
-    SerialPort controlSerial = new SerialPort("COM11", 115200); // Ganti COM5 sesuai port ESP32 kamu
+    SerialPort controlSerial = new SerialPort("COM11", 115200); // Ganti COM sesuai port kamu
 
     void Start()
     {
-        if(!controlSerial.IsOpen)
+        if (!controlSerial.IsOpen)
         {
             try
             {
@@ -28,40 +28,46 @@ public class RandomSpawn : MonoBehaviour
                 Debug.LogError("Failed to open serial port: " + e.Message);
             }
         }
+
         spawnPosition = new Vector2(xPos, yPosition);
         transform.position = spawnPosition;
+
+        // Tahan bola di tempat dulu
+        rb.isKinematic = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log(rb.velocity);
-
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    xPos -= 0.05f;
-        //}
-
-        //if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    xPos += 0.05f;
-        //}
-
         if (controlSerial.IsOpen && controlSerial.BytesToRead > 0)
         {
             try
             {
                 string data = controlSerial.ReadLine().Trim();
 
-                if (data == "LEFT")
+                if (!WinPanelManager.Instance.IsPanelActive())
                 {
-                    xPos -= 0.1f;
-                }
-                else if (data == "RIGHT") 
-                { 
-                    xPos += 0.1f; 
+                    if (data == "LEFT")
+                    {
+                        xPos -= 0.1f;
+                    }
+                    else if (data == "RIGHT")
+                    {
+                        xPos += 0.1f;
+                    }
+                    else if (data == "SPACE" && !isBallRelease)
+                    {
+                        rb.isKinematic = false;
+                        rb.velocity = Vector2.zero;
+                        isBallRelease = true;
+                        Debug.Log("Spawned at: " + spawnPosition);
+                    }
                 }
 
+                // Jika panel sedang aktif dan tombol SPACE ditekan → skip countdown
+                if (data == "SPACE" && WinPanelManager.Instance.IsPanelActive())
+                {
+                    WinPanelManager.Instance.SkipCountdown();
+                }
             }
             catch (System.Exception e)
             {
@@ -69,19 +75,12 @@ public class RandomSpawn : MonoBehaviour
             }
         }
 
-        xPos = Mathf.Clamp(xPos, minX, maxX); // Ensure xPos stays within bounds
+        xPos = Mathf.Clamp(xPos, minX, maxX);
 
-        if (isBallRelease == false)
+        if (!isBallRelease)
         {
             spawnPosition = new Vector2(xPos, yPosition);
             transform.position = spawnPosition;
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            isBallRelease = true;
-            rb.velocity = Vector2.zero;
-            Debug.Log("Spawned at: " + spawnPosition);
         }
     }
 
