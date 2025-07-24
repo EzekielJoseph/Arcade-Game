@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class Box2ScriptHadiah : MonoBehaviour
+public class TriggerHadiah : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public string hadiahMessage = "";
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Ball"))
         {
-            Debug.Log("Selamat Kamu Menang Lima Puluh Ribu USD!!!");
+            Debug.Log(hadiahMessage);
             WinPanelManager panel = FindAnyObjectByType<WinPanelManager>();
             if (panel != null)
             {
-                panel.ShowWinPanel("Selamat Kamu Menang Lima Puluh Ribu USD!!!");
+                panel.ShowWinPanel(hadiahMessage);
             }
         }
     }

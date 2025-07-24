@@ -1226,9 +1226,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 259981730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13296447d5229c46815d1173a73a0d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b96d9c3985d97e458f13ca3c5427e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hadiahMessage: NT Brok, Silahkan Coba Lagi
 --- !u!1 &280550710
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,9 +2266,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 482166818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e28fdd1913fc0c48b4dd0817626e7eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b96d9c3985d97e458f13ca3c5427e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hadiahMessage: Selamat Kamu Dapat Chiki Balls!!!
 --- !u!1 &497406935
 GameObject:
   m_ObjectHideFlags: 0
@@ -5167,9 +5169,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1154221556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c332806c82c3b4f86705dce5509244, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b96d9c3985d97e458f13ca3c5427e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hadiahMessage: Selamat Kamu Menang NVDIA 5090!!!
 --- !u!1 &1170679735
 GameObject:
   m_ObjectHideFlags: 0
@@ -6861,9 +6864,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1477005806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5089ee912175ea14ba202dd5393a59b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b96d9c3985d97e458f13ca3c5427e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hadiahMessage: Selamat Kamu Menang Lima Puluh Ribu USD!!!
 --- !u!1 &1492959751
 GameObject:
   m_ObjectHideFlags: 0
@@ -9269,7 +9273,7 @@ Transform:
   m_GameObject: {fileID: 2043594051}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4798, y: -1.8915, z: 0}
+  m_LocalPosition: {x: -1.448, y: -1.8915, z: 0}
   m_LocalScale: {x: 0.12995118, y: 0.22789857, z: 0.3578}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9590,7 +9594,7 @@ GameObject:
   - component: {fileID: 2112220879}
   - component: {fileID: 2112220878}
   m_Layer: 5
-  m_Name: You Win
+  m_Name: You Get
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9612,8 +9616,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 666.8255, y: 321.7343}
+  m_AnchoredPosition: {x: 9, y: 0}
+  m_SizeDelta: {x: 704.1318, y: 321.7343}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2112220878
 MonoBehaviour:
@@ -9635,7 +9639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: YOU WIN
+  m_text: YOU GET
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 720b656dfc53d0a4daa1aa7dfcf22ea6, type: 2}
   m_sharedMaterial: {fileID: 5997070381373336113, guid: 720b656dfc53d0a4daa1aa7dfcf22ea6, type: 2}
