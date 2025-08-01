@@ -43,3 +43,8 @@ Game ini menggabungkan komponen **hardware** dan **software** untuk menciptakan 
 - Komunikasi serial via `SerialPort` di C#
 
 ---
+
+## Skematik Rangkaian ESP32
+
+
+![alt text](https://github.com/EzekielJoseph/Arcade-Game/blob/main/Skematik.png)
