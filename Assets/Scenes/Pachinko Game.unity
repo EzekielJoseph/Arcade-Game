@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2072fdfe5b046f84096a40c2101a607a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomSpawn: {fileID: 1282907963}
   panel: {fileID: 807719491}
   winText: {fileID: 834489374}
   countdownText: {fileID: 2094103490}

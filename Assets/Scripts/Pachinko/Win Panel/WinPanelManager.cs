@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class WinPanelManager : MonoBehaviour
 {
     public static WinPanelManager Instance;
+    public RandomSpawn randomSpawn; // Referensi ke RandomSpawn untuk mengakses metode spawn
 
     public GameObject panel;
     public TMP_Text winText;
@@ -58,7 +59,6 @@ public class WinPanelManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             count--;
         }
-
         LoadRegistrasiScene();
     }
 
@@ -74,6 +74,7 @@ public class WinPanelManager : MonoBehaviour
     private void LoadRegistrasiScene()
     {
         panelActive = false;
+        randomSpawn.closePort();
         SceneManager.LoadScene("Registrasi");
     }
 

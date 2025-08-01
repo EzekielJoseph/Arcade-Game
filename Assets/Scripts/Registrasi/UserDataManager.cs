@@ -3,6 +3,7 @@ using UnityEngine;
 public class UserDataManager : MonoBehaviour
 {
     public static UserDataManager Instance;
+    public string Port;
 
     public Data userData; // class Data kamu yang berisi nama, email, dll
 

@@ -11,10 +11,13 @@ public class RandomSpawn : MonoBehaviour
     public bool isBallRelease = false;
 
     private Vector2 spawnPosition;
-    private SerialPort controlSerial = new SerialPort("COM11", 115200); // Ganti sesuai COM yang dipakai
+    private SerialPort controlSerial;
 
-    void Start()
+    public void ConnectToPort(string port)
     {
+        controlSerial = new SerialPort(port, 115200);
+        Debug.Log("Trying to connect to port " + port);
+
         if (!controlSerial.IsOpen)
         {
             try
@@ -27,7 +30,11 @@ public class RandomSpawn : MonoBehaviour
                 Debug.LogError("Failed to open serial port: " + e.Message);
             }
         }
+    }
 
+    void Start()
+    {
+        ConnectToPort(UserDataManager.Instance.Port);
         spawnPosition = new Vector2(xPos, yPosition);
         transform.position = spawnPosition;
 
@@ -36,17 +43,20 @@ public class RandomSpawn : MonoBehaviour
 
     void Update()
     {
+
         // Baca input dari serial jika ada
         string data = null;
-        if (controlSerial.IsOpen && controlSerial.BytesToRead > 0)
+        if(controlSerial!=null){
+            if(controlSerial.IsOpen && controlSerial.BytesToRead > 0)
         {
-            try
-            {
-                data = controlSerial.ReadLine().Trim();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError("Error reading from serial port: " + e.Message);
+                try
+                {
+                    data = controlSerial.ReadLine().Trim();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Error reading from serial port: " + e.Message);
+                }
             }
         }
 
@@ -87,6 +97,11 @@ public class RandomSpawn : MonoBehaviour
     }
 
     void OnApplicationQuit()
+    {
+        closePort();
+    }
+
+    public void closePort()
     {
         if (controlSerial != null && controlSerial.IsOpen)
         {
